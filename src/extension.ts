@@ -1,11 +1,11 @@
 // src/extension.ts
 
-import * as fs from 'fs';
-import { promisify } from 'util';
-import * as path from 'path';
-import * as vscode from 'vscode';
 import { ProjectManagerWebviewProvider } from '@/providers/WebviewProvider';
 import { DataManager } from '@/services/DataManager';
+import * as fs from 'fs';
+import * as path from 'path';
+import { promisify } from 'util';
+import * as vscode from 'vscode';
 
 let webviewProvider: ProjectManagerWebviewProvider | undefined;
 
@@ -183,34 +183,36 @@ async function createProjectManagerFolder(): Promise<void> {
     const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
     if (!workspaceFolder) {
         vscode.window.showErrorMessage('No workspace folder found');
-        try {
-            const projectManagerPath = path.join(workspaceFolder.uri.fsPath, '.project-manager');
-            const mkdir = promisify(fs.mkdir);
-            await mkdir(projectManagerPath, { recursive: true });
-
-            // Create initial project data
-            const dataManager = DataManager.getInstance();
-            await dataManager.initialize();
-
-            vscode.window.showInformationMessage(
-                'Project Manager initialized successfully! Use Ctrl+Shift+P to open the dashboard.',
-                'Open Dashboard'
-            ).then(result => {
-                if (result === 'Open Dashboard') {
-                    vscode.commands.executeCommand('projectManager.openDashboard');
-                }
-            });
-
-        } catch (error) {
-            vscode.window.showErrorMessage(`Failed to initialize Project Manager: ${error}`);
-        }
+        return;
     }
+    try {
+        const projectManagerPath = path.join(workspaceFolder.uri.fsPath, '.project-manager');
+        const mkdir = promisify(fs.mkdir);
+        await mkdir(projectManagerPath, { recursive: true });
 
-    export function deactivate(): void {
-        // console.log('Project Manager Pro extension is being deactivated');
+        // Create initial project data
+        const dataManager = DataManager.getInstance();
+        await dataManager.initialize();
 
-        if (webviewProvider) {
-            webviewProvider.dispose();
-            webviewProvider = undefined;
-        }
+        vscode.window.showInformationMessage(
+            'Project Manager initialized successfully! Use Ctrl+Shift+P to open the dashboard.',
+            'Open Dashboard'
+        ).then((result: string | undefined) => {
+            if (result === 'Open Dashboard') {
+                vscode.commands.executeCommand('projectManager.openDashboard');
+            }
+        });
+
+    } catch (error) {
+        vscode.window.showErrorMessage(`Failed to initialize Project Manager: ${error}`);
     }
+}
+
+export function deactivate(): void {
+    // console.log('Project Manager Pro extension is being deactivated');
+
+    if (webviewProvider) {
+        webviewProvider.dispose();
+        webviewProvider = undefined;
+    }
+}
