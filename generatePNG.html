@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Manager Pro - Icon Converter</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007ACC;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .icon-display {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .icon-preview {
+            display: inline-block;
+            margin: 1rem;
+            text-align: center;
+        }
+
+        .icon-preview img {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+        }
+
+        .download-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 2rem 0;
+        }
+
+        .btn {
+            background: #007ACC;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0.5rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #005A9E;
+        }
+
+        .instructions {
+            background: #e3f2fd;
+            border-left: 4px solid #007ACC;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        code {
+            background: #f1f1f1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .online-tools {
+            background: #fff3cd;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+
+        .online-tools h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🚀 Project Manager Pro - Extension Icon</h1>
+
+        <div class="icon-display">
+            <div class="icon-preview">
+                <div id="icon-container"></div>
+                <p><strong>128x128 pixels</strong><br>Extension Icon</p>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <h3>📥 Download Your Icon</h3>
+            <button class="btn" onclick="downloadIcon()">Download icon.png (128x128)</button>
+            <button class="btn" onclick="downloadSVG()">Download icon.svg</button>
+        </div>
+
+        <div class="instructions">
+            <h3>📋 How to Use This Icon</h3>
+            <ol>
+                <li>Click "Download icon.png (128x128)" button above</li>
+                <li>Save the file as <code>icon.png</code> in your extension's root directory</li>
+                <li>Update your <code>package.json</code> to reference the icon:
+                    <pre><code>{
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#007ACC",
+    "theme": "dark"
+  }
+}</code></pre>
+                </li>
+                <li>The icon will appear in VS Code marketplace and extension list</li>
+            </ol>
+        </div>
+
+        <div class="online-tools">
+            <h3>🌐 Alternative: Online SVG to PNG Converters</h3>
+            <p>If the download button doesn't work, you can use these online tools:</p>
+            <ul>
+                <li><strong>CloudConvert:</strong> <a href="https://cloudconvert.com/svg-to-png"
+                        target="_blank">cloudconvert.com/svg-to-png</a></li>
+                <li><strong>Convertio:</strong> <a href="https://convertio.co/svg-png/"
+                        target="_blank">convertio.co/svg-png/</a></li>
+                <li><strong>OnlineConvertFree:</strong> <a
+                        href="https://onlineconvertfree.com/convert-format/svg-to-png/"
+                        target="_blank">onlineconvertfree.com</a></li>
+            </ul>
+            <p><strong>Steps:</strong></p>
+            <ol>
+                <li>Download the SVG file using the button above</li>
+                <li>Upload it to any of these online converters</li>
+                <li>Set output size to 128x128 pixels</li>
+                <li>Download the resulting PNG file</li>
+            </ol>
+        </div>
+
+        <div class="instructions">
+            <h3>🎨 Icon Design Features</h3>
+            <ul>
+                <li><strong>Professional VS Code Blue:</strong> Uses official VS Code brand colors (#007ACC)</li>
+                <li><strong>Dashboard Layout:</strong> Represents project management with card-based grid</li>
+                <li><strong>Status Indicators:</strong> Color-coded dots showing different project states</li>
+                <li><strong>Checkmark Badge:</strong> Suggests completion and successful management</li>
+                <li><strong>High Contrast:</strong> Readable at all sizes, from 16px to 128px</li>
+                <li><strong>Modern Design:</strong> Clean, professional appearance suitable for VS Code</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // SVG content
+        const svgContent = `<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="64" cy="64" r="58" fill="#007ACC" stroke="#005A9E" stroke-width="2"/>
+  
+  <!-- Inner Background for contrast -->
+  <circle cx="64" cy="64" r="52" fill="#0087D1" opacity="0.9"/>
+  
+  <!-- Main Icon Grid/Dashboard -->
+  <g transform="translate(24, 24)">
+    <!-- Top Row Cards -->
+    <rect x="4" y="8" width="24" height="18" rx="3" fill="white" opacity="0.95"/>
+    <rect x="32" y="8" width="24" height="18" rx="3" fill="white" opacity="0.95"/>
+    <rect x="60" y="8" width="24" height="18" rx="3" fill="white" opacity="0.95"/>
+    
+    <!-- Middle Row Cards -->
+    <rect x="4" y="32" width="36" height="18" rx="3" fill="white" opacity="0.95"/>
+    <rect x="44" y="32" width="36" height="18" rx="3" fill="white" opacity="0.95"/>
+    
+    <!-- Bottom Row Cards -->
+    <rect x="4" y="56" width="24" height="18" rx="3" fill="white" opacity="0.95"/>
+    <rect x="32" y="56" width="24" height="18" rx="3" fill="white" opacity="0.95"/>
+    <rect x="60" y="56" width="24" height="18" rx="3" fill="white" opacity="0.95"/>
+    
+    <!-- Status indicators/dots -->
+    <circle cx="14" cy="12" r="2" fill="#28A745"/> <!-- Green - completed -->
+    <circle cx="42" cy="12" r="2" fill="#FFC107"/> <!-- Yellow - in progress -->
+    <circle cx="70" cy="12" r="2" fill="#DC3545"/> <!-- Red - critical -->
+    
+    <circle cx="14" cy="36" r="2" fill="#17A2B8"/> <!-- Blue - info -->
+    <circle cx="54" cy="36" r="2" fill="#6C757D"/> <!-- Gray - pending -->
+    
+    <circle cx="14" cy="60" r="2" fill="#28A745"/> <!-- Green -->
+    <circle cx="42" cy="60" r="2" fill="#FFC107"/> <!-- Yellow -->
+    <circle cx="70" cy="60" r="2" fill="#007ACC"/> <!-- Blue -->
+  </g>
+  
+  <!-- Checkmark overlay to suggest completion/management -->
+  <g transform="translate(84, 84)">
+    <circle cx="12" cy="12" r="16" fill="white" opacity="0.95"/>
+    <circle cx="12" cy="12" r="14" fill="#28A745"/>
+    <path d="M6 12 L10 16 L18 8" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  
+  <!-- Subtle gradient overlay for depth -->
+  <defs>
+    <radialGradient id="shine" cx="0.3" cy="0.3" r="0.8">
+      <stop offset="0%" stop-color="white" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="64" cy="64" r="58" fill="url(#shine)"/>
+</svg>`;
+
+        // Display the icon
+        document.getElementById('icon-container').innerHTML = svgContent;
+
+        function downloadSVG() {
+            const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'icon.svg';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function downloadIcon() {
+            // Create a canvas to convert SVG to PNG
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 128;
+            canvas.height = 128;
+
+            const img = new Image();
+            const svgBlob = new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
+            const url = URL.createObjectURL(svgBlob);
+
+            img.onload = function () {
+                ctx.drawImage(img, 0, 0, 128, 128);
+
+                canvas.toBlob(function (blob) {
+                    const downloadUrl = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = downloadUrl;
+                    a.download = 'icon.png';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(downloadUrl);
+                    URL.revokeObjectURL(url);
+                }, 'image/png');
+            };
+
+            img.onerror = function () {
+                alert('Unable to convert automatically. Please use the SVG download and an online converter.');
+                URL.revokeObjectURL(url);
+            };
+
+            img.src = url;
+        }
+    </script>
+</body>
+
+</html>
