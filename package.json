@@ -4,7 +4,7 @@
     "displayName": "DocsToCode Data Manager",
     "description": "Professional project management with features, bugs, and tasks tracking. To be used with the DocsToCode MCP Server.",
     "publisher": "vibeclasses",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "engines": {
         "vscode": "^1.85.0"
     },
@@ -12,7 +12,7 @@
         "Visualization",
         "Extension Packs",
         "Chat",
-        "Education", 
+        "Education",
         "Other"
     ],
     "main": "./dist/extension.js",
@@ -22,7 +22,7 @@
     },
     "license": "MIT",
     "bugs": {
-       "url": "https://github.com/vibeclasses/docstocode-extension/issues"
+        "url": "https://github.com/vibeclasses/docstocode-extension/issues"
     },
     "homepage": "https://github.com/vibeclasses/docstocode-extension#readme",
     "contributes": {
