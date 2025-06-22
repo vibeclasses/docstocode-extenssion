@@ -134,3 +134,14 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Ignore the output directory for VSIX packages
+node_modules/
+dist/
+*.vsix
+.vscode-test/
+coverage/
+.nyc_output/
+.env
+.DS_Store
+*.log
