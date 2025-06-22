@@ -31,7 +31,7 @@ export class DataManager {
         }
 
         this.projectPath = workspaceFolder.uri.fsPath;
-        this.dataPath = path.join(this.projectPath, '.project-manager');
+        this.dataPath = path.join(this.projectPath, '.docsToCode');
     }
 
     public static getInstance(): DataManager {

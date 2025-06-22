@@ -1,5 +1,3 @@
-// src/extension.ts
-
 import { ProjectManagerWebviewProvider } from '@/providers/WebviewProvider';
 import { DataManager } from '@/services/DataManager';
 import * as fs from 'fs';
@@ -10,36 +8,28 @@ import * as vscode from 'vscode';
 let webviewProvider: ProjectManagerWebviewProvider | undefined;
 
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
-    // console.log('Project Manager Pro extension is being activated');
 
-    // Check if .project-manager folder exists
+    // Check if .docsToCode folder exists
     const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
     if (!workspaceFolder) {
-        // console.log('No workspace folder found, extension will not activate');
         return;
     }
-    const projectManagerPath = path.join(workspaceFolder.uri.fsPath, '.project-manager');
+    const projectManagerPath = path.join(workspaceFolder.uri.fsPath, '.docsTocode');
 
     const access = promisify(fs.access);
 
     try {
         await access(projectManagerPath);
-        // console.log('Project Manager folder detected, activating extension');
-        // console.log('Project Manager folder detected, activating extension');
 
-        // Set context for when clauses
         await vscode.commands.executeCommand('setContext', 'projectManagerActive', true);
 
-        // Initialize data manager
         const dataManager = DataManager.getInstance();
         await dataManager.initialize();
 
-        // Create webview provider
         webviewProvider = new ProjectManagerWebviewProvider(context);
 
-        // Register commands
         const openDashboardCommand = vscode.commands.registerCommand(
-            'projectManager.openDashboard',
+            'docstocode.openDashboard',
             async () => {
                 if (webviewProvider) {
                     await webviewProvider.show();
@@ -48,14 +38,14 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         );
 
         const createProjectCommand = vscode.commands.registerCommand(
-            'projectManager.createProject',
+            'docstocode.createProject',
             async () => {
                 await createProjectManagerFolder();
             }
         );
 
         const exportDataCommand = vscode.commands.registerCommand(
-            'projectManager.exportData',
+            'docstocode.exportData',
             async () => {
                 try {
                     const dataManager = DataManager.getInstance();
@@ -80,7 +70,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         );
 
         const importDataCommand = vscode.commands.registerCommand(
-            'projectManager.importData',
+            'docstocode.importData',
             async () => {
                 try {
                     const fileUri = await vscode.window.showOpenDialog({
@@ -117,9 +107,9 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             vscode.StatusBarAlignment.Left,
             100
         );
-        statusBarItem.text = '$(project) Project Manager';
+        statusBarItem.text = '$(project) DocsToCode UI';
         statusBarItem.tooltip = 'Open Project Manager Dashboard';
-        statusBarItem.command = 'projectManager.openDashboard';
+        statusBarItem.command = 'docstocode.openDashboard';
         statusBarItem.show();
 
         // Add to subscriptions
@@ -131,9 +121,8 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             statusBarItem
         );
 
-        // Watch for changes in the .project-manager folder
         const watcher = vscode.workspace.createFileSystemWatcher(
-            new vscode.RelativePattern(workspaceFolder, '.project-manager/**/*')
+            new vscode.RelativePattern(workspaceFolder, '.docsTocode/**/*')
         );
 
         watcher.onDidChange(() => {
@@ -146,18 +135,18 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         // console.log('Project Manager Pro extension activated successfully');
 
         // Show welcome message on first activation
-        const hasShownWelcome = context.globalState.get('projectManager.hasShownWelcome', false);
+        const hasShownWelcome = context.globalState.get('docstocode.hasShownWelcome', false);
         if (!hasShownWelcome) {
             const result = await vscode.window.showInformationMessage(
-                'Project Manager Pro is now active! Use Ctrl+Shift+P (Cmd+Shift+P on Mac) to open the dashboard.',
+                'DocsToCode is now active! Use Ctrl+Shift+D (Cmd+Shift+D on Mac) to open the dashboard.',
                 'Open Dashboard',
                 'Don\'t show again'
             );
 
             if (result === 'Open Dashboard') {
-                await vscode.commands.executeCommand('projectManager.openDashboard');
+                await vscode.commands.executeCommand('docstocode.openDashboard');
             } else if (result === 'Don\'t show again') {
-                await context.globalState.update('projectManager.hasShownWelcome', true);
+                await context.globalState.update('docstocode.hasShownWelcome', true);
             }
         }
 
@@ -186,7 +175,7 @@ async function createProjectManagerFolder(): Promise<void> {
         return;
     }
     try {
-        const projectManagerPath = path.join(workspaceFolder.uri.fsPath, '.project-manager');
+        const projectManagerPath = path.join(workspaceFolder.uri.fsPath, '.docsToCode');
         const mkdir = promisify(fs.mkdir);
         await mkdir(projectManagerPath, { recursive: true });
 
@@ -199,7 +188,7 @@ async function createProjectManagerFolder(): Promise<void> {
             'Open Dashboard'
         ).then((result: string | undefined) => {
             if (result === 'Open Dashboard') {
-                vscode.commands.executeCommand('projectManager.openDashboard');
+                vscode.commands.executeCommand('docstocode.openDashboard');
             }
         });
 

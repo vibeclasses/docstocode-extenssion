@@ -2,7 +2,7 @@ import { DataManager } from '@/services/DataManager';
 import * as vscode from 'vscode';
 
 export class ProjectManagerWebviewProvider {
-    private static readonly viewType = 'projectManager.dashboard';
+    private static readonly viewType = 'docstocode.dashboard';
     private panel: vscode.WebviewPanel | undefined;
     private dataManager: DataManager;
 

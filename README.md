@@ -2,18 +2,20 @@
 
 ## Summary
 
-This project is a Visual Studio Code (VSX) extension designed to provide a visual interface for managing **DocsToCode MCP Server88 data. Built primarily with TypeScript, JavaScript, and CSS, the extension streamlines the process of handling documentation-to-code workflows, allowing users to efficiently manage, edit, and organize **DocsToCode** data directly within their development environment. Its goal is to enhance productivity by integrating documentation management into the coding workflow through an intuitive and accessible UI.
+This project is a Visual Studio Code (VSX) extension designed to provide a visual interface for managing **DocsToCode MCP Server88 data. Built primarily with TypeScript, JavaScript, and CSS, the extension streamlines the process of handling documentation-to-code workflows, allowing users to efficiently manage, edit, and organize **DocsToCode\*\* data directly within their development environment. Its goal is to enhance productivity by integrating documentation management into the coding workflow through an intuitive and accessible UI.
 
 ### 🎯 **Architecture Excellence**
 
 **JSON Schema-Based Data Model:**
+
 - TypeScript interfaces with runtime validation using Ajv
 - Comprehensive schemas for Features, Bugs, and Tasks
 - Type-safe CRUD operations with validation
 - Extensible design for future item types
 
 **Professional File Structure:**
-- `.project-manager/` folder activation trigger
+
+- `.docsToCode/` folder activation trigger
 - Atomic data operations with automatic backups
 - Export/import functionality
 - Clean separation of concerns
@@ -21,12 +23,14 @@ This project is a Visual Studio Code (VSX) extension designed to provide a visua
 ### 🎨 **Professional UI/UX**
 
 **Modern Design:**
+
 - VS Code design system compliance
 - Professional animations and interactions
 - Responsive grid layouts
 - Accessibility features (ARIA, keyboard navigation)
 
 **Rich Functionality:**
+
 - Dashboard with statistics and recent activity
 - Tabbed interface for different item types
 - Advanced filtering and search
@@ -35,12 +39,14 @@ This project is a Visual Studio Code (VSX) extension designed to provide a visua
 ### ⚡ **Technical Excellence**
 
 **TypeScript Best Practices:**
+
 - Latest TypeScript version with strict settings
 - Comprehensive type definitions
 - Path mapping for clean imports
 - Professional error handling
 
 **Performance Optimized:**
+
 - Debounced user interactions
 - Efficient DOM updates
 - Memory-conscious data management
@@ -48,7 +54,7 @@ This project is a Visual Studio Code (VSX) extension designed to provide a visua
 
 ### 🚀 **Key Benefits**
 
-1. **Automatic Activation**: Only activates when `.project-manager/` folder exists
+1. **Automatic Activation**: Only activates when `.docsToCode/` folder exists
 2. **Professional Keyboard Shortcuts**: `Ctrl+Shift+P` to open dashboard
 3. **Robust Data Validation**: JSON Schema ensures data integrity
 4. **Type-Safe Development**: Full TypeScript support prevents runtime errors

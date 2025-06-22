@@ -7,13 +7,16 @@ This comprehensive guide will walk you through setting up, testing, packaging, a
 Before starting, ensure you have:
 
 ### Required Software
+
 - **Node.js 18+**: [Download from nodejs.org](https://nodejs.org/)
 - **npm** (comes with Node.js)
 - **Git**: [Download from git-scm.com](https://git-scm.com/)
 - **Visual Studio Code**: [Download from code.visualstudio.com](https://code.visualstudio.com/)
 
 ### Verify Installation
+
 Open your terminal and run:
+
 ```bash
 node --version    # Should show v18.x.x or higher
 npm --version     # Should show 9.x.x or higher
@@ -24,6 +27,7 @@ code --version    # Should show VS Code version
 ## 🛠️ Step 1: Project Setup
 
 ### 1.1 Create Project Directory
+
 ```bash
 # Create and navigate to your project folder
 mkdir project-manager-pro
@@ -34,6 +38,7 @@ npm init -y
 ```
 
 ### 1.2 Install Development Dependencies
+
 ```bash
 # Core VS Code extension dependencies
 npm install --save-dev @types/vscode@^1.85.0
@@ -48,6 +53,7 @@ npm install --global @vscode/vsce
 ```
 
 ### 1.3 Create Project Structure
+
 Create the following folders and files:
 
 ```bash
@@ -66,9 +72,11 @@ touch README.md
 ```
 
 ### 1.4 Copy the Code Files
+
 Copy all the code from the previous artifacts into their respective files:
+
 - `package.json` → Root directory
-- `tsconfig.json` → Root directory  
+- `tsconfig.json` → Root directory
 - `src/extension.ts` → Extension main file
 - `src/schemas/project-schemas.ts` → Schema definitions
 - `src/services/DataManager.ts` → Data management
@@ -79,6 +87,7 @@ Copy all the code from the previous artifacts into their respective files:
 ## 🧪 Step 2: Testing Your Extension
 
 ### 2.1 Compile TypeScript
+
 ```bash
 # Compile once
 npm run compile
@@ -90,16 +99,19 @@ npm run watch
 ### 2.2 Debug in Extension Development Host
 
 1. **Open VS Code in your project directory:**
+
    ```bash
    code .
    ```
 
 2. **Open the Run and Debug panel:**
+
    - Press `Ctrl+Shift+D` (Windows/Linux) or `Cmd+Shift+D` (Mac)
    - Or click the Run and Debug icon in the sidebar
 
 3. **Create launch configuration:**
    Create `.vscode/launch.json`:
+
    ```json
    {
      "version": "0.2.0",
@@ -108,12 +120,8 @@ npm run watch
          "name": "Run Extension",
          "type": "extensionHost",
          "request": "launch",
-         "args": [
-           "--extensionDevelopmentPath=${workspaceFolder}"
-         ],
-         "outFiles": [
-           "${workspaceFolder}/dist/**/*.js"
-         ],
+         "args": ["--extensionDevelopmentPath=${workspaceFolder}"],
+         "outFiles": ["${workspaceFolder}/dist/**/*.js"],
          "preLaunchTask": "${workspaceFolder}/npm: compile"
        }
      ]
@@ -122,6 +130,7 @@ npm run watch
 
 4. **Create tasks configuration:**
    Create `.vscode/tasks.json`:
+
    ```json
    {
      "version": "2.0.0",
@@ -162,22 +171,24 @@ npm run watch
 In the Extension Development Host window:
 
 1. **Create test workspace:**
+
    ```bash
    # Create a test folder
    mkdir test-project
    cd test-project
-   
+
    # Open in VS Code
    code .
    ```
 
 2. **Initialize Project Manager:**
+
    - Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (Mac)
    - Type "Project Manager" and select initialization option
-   - Or manually create `.project-manager/` folder
+   - Or manually create `.docsToCode/` folder
 
 3. **Test core features:**
-   - ✅ Extension activates when `.project-manager/` folder exists
+   - ✅ Extension activates when `.docsToCode/` folder exists
    - ✅ Dashboard opens with `Ctrl+Shift+P`
    - ✅ Can create features, bugs, and tasks
    - ✅ Data persists between sessions
@@ -187,6 +198,7 @@ In the Extension Development Host window:
 ### 2.4 Common Testing Issues
 
 #### Extension Not Activating
+
 ```bash
 # Check the Developer Console
 # In Extension Development Host: Help > Toggle Developer Tools
@@ -194,6 +206,7 @@ In the Extension Development Host window:
 ```
 
 #### TypeScript Compilation Errors
+
 ```bash
 # Check compilation output
 npm run compile
@@ -205,6 +218,7 @@ npm run compile
 ```
 
 #### Webview Not Loading
+
 ```bash
 # Check if files exist in media/ folder
 ls media/
@@ -218,6 +232,7 @@ ls media/
 ### 3.1 Prepare for Packaging
 
 1. **Update package.json metadata:**
+
    ```json
    {
      "name": "project-manager-pro",
@@ -237,6 +252,7 @@ ls media/
    ```
 
 2. **Create extension icon:**
+
    ```bash
    # Create icon.png (128x128 pixels) in root directory
    # Use a professional design tool or online generator
@@ -251,7 +267,9 @@ ls media/
    - Feature list
 
 ### 3.2 Create .vscodeignore
+
 Create `.vscodeignore` file to exclude unnecessary files:
+
 ```
 .vscode/**
 .vscode-test/**
@@ -269,6 +287,7 @@ node_modules/**
 ```
 
 ### 3.3 Package the Extension
+
 ```bash
 # Ensure code compiles without errors
 npm run compile
@@ -280,6 +299,7 @@ vsce package
 ```
 
 ### 3.4 Test the Packaged Extension
+
 ```bash
 # Install the packaged extension locally
 code --install-extension project-manager-pro-1.0.0.vsix
@@ -293,10 +313,12 @@ code --install-extension project-manager-pro-1.0.0.vsix
 ### 4.1 Create Publisher Account
 
 1. **Visit Azure DevOps:**
+
    - Go to [https://dev.azure.com](https://dev.azure.com)
    - Sign in with Microsoft account
 
 2. **Create Personal Access Token:**
+
    - Click your profile picture → "Personal access tokens"
    - Click "New Token"
    - Name: "VS Code Extensions"
@@ -305,6 +327,7 @@ code --install-extension project-manager-pro-1.0.0.vsix
    - Create and **save the token securely**
 
 3. **Create Publisher:**
+
    ```bash
    # Login to vsce
    vsce login your-publisher-name
@@ -312,6 +335,7 @@ code --install-extension project-manager-pro-1.0.0.vsix
    ```
 
    Or create publisher manually:
+
    - Visit [Visual Studio Marketplace](https://marketplace.visualstudio.com/manage)
    - Click "Create publisher"
    - Fill in details (must match package.json publisher field)
@@ -332,6 +356,7 @@ vsce publish project-manager-pro-1.0.0.vsix
 ### 4.3 Verify Publication
 
 1. **Check marketplace:**
+
    - Visit [marketplace.visualstudio.com](https://marketplace.visualstudio.com)
    - Search for your extension
    - Verify all information is correct
@@ -339,12 +364,13 @@ vsce publish project-manager-pro-1.0.0.vsix
 2. **Install from marketplace:**
    ```bash
    # Install your published extension
-   code --install-extension your-publisher-name.project-manager-pro
+   code --install-extension your-publisher-name.docsToCode-pro
    ```
 
 ## 🔄 Step 5: Updating Your Extension
 
 ### 5.1 Version Management
+
 ```bash
 # Update version in package.json
 npm version patch    # 1.0.0 → 1.0.1
@@ -353,6 +379,7 @@ npm version major    # 1.1.0 → 2.0.0
 ```
 
 ### 5.2 Publishing Updates
+
 ```bash
 # Compile and test
 npm run compile
@@ -409,6 +436,7 @@ npm install --save-dev @vscode/test-cli @vscode/test-electron
 ### 6.3 Continuous Integration
 
 Create `.github/workflows/ci.yml`:
+
 ```yaml
 name: CI
 
@@ -417,25 +445,26 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-        cache: 'npm'
-    
-    - run: npm ci
-    - run: npm run compile
-    - run: npm test
-    
-    - name: Package extension
-      run: npx vsce package
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm run compile
+      - run: npm test
+
+      - name: Package extension
+        run: npx vsce package
 ```
 
 ## 🚨 Troubleshooting Common Issues
 
 ### Compilation Errors
+
 ```bash
 # Clear TypeScript cache
 rm -rf dist/
@@ -446,6 +475,7 @@ npm install
 ```
 
 ### Extension Not Loading
+
 ```bash
 # Check extension logs
 # Help > Developer > Show Running Extensions
@@ -453,6 +483,7 @@ npm install
 ```
 
 ### Webview Issues
+
 ```bash
 # Check Content Security Policy
 # Ensure all resources are properly referenced
@@ -460,6 +491,7 @@ npm install
 ```
 
 ### Publishing Errors
+
 ```bash
 # Check publisher name matches package.json
 # Verify Personal Access Token is valid
@@ -469,16 +501,19 @@ npm install
 ## 📚 Additional Resources
 
 ### Official Documentation
+
 - [VS Code Extension API](https://code.visualstudio.com/api)
 - [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
 - [Publishing Extensions](https://code.visualstudio.com/api/working-with-extensions/publishing-extension)
 
 ### Useful Tools
+
 - [Yeoman VS Code Generator](https://code.visualstudio.com/api/get-started/your-first-extension)
 - [Extension Samples](https://github.com/microsoft/vscode-extension-samples)
 - [VS Code Icons](https://microsoft.github.io/vscode-codicons/dist/codicon.html)
 
 ### Community
+
 - [VS Code Extension Development Discord](https://discord.gg/vscode-dev)
 - [Stack Overflow - vscode-extensions tag](https://stackoverflow.com/questions/tagged/vscode-extensions)
 
@@ -487,6 +522,7 @@ npm install
 You've successfully built, tested, packaged, and published your first VS Code extension! Your Project Manager Pro extension is now available for developers worldwide.
 
 ### Next Steps
+
 - Gather user feedback
 - Add new features based on requests
 - Monitor analytics in marketplace

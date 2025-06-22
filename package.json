@@ -1,27 +1,41 @@
 {
-    "name": "docstocode",
+    "name": "docstocode-data-manager",
     "icon": "icon.png",
     "displayName": "DocsToCode Data Manager",
-    "description": "Professional project management with features, bugs, and tasks tracking",
+    "description": "Professional project management with features, bugs, and tasks tracking. To be used with the DocsToCode MCP Server.",
+    "publisher": "vibeclasses",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.85.0"
     },
     "categories": [
+        "Visualization",
+        "Extension Packs",
+        "Chat",
+        "Education", 
         "Other"
     ],
     "main": "./dist/extension.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/vibeclasses/docstocode-extension.git"
+    },
+    "license": "MIT",
+    "bugs": {
+       "url": "https://github.com/vibeclasses/docstocode-extension/issues"
+    },
+    "homepage": "https://github.com/vibeclasses/docstocode-extension#readme",
     "contributes": {
         "commands": [
             {
-                "command": "projectManager.openDashboard",
+                "command": "docstocode.openDashboard",
                 "title": "Open DocsToCode Dashboard",
-                "category": "Project Manager"
+                "category": "Visualization"
             }
         ],
         "keybindings": [
             {
-                "command": "projectManager.openDashboard",
+                "command": "docstocode.openDashboard",
                 "key": "ctrl+shift+d",
                 "mac": "cmd+shift+d",
                 "when": "projectManagerActive"
